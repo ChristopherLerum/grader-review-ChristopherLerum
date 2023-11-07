@@ -16,7 +16,7 @@ then
     exit
 fi
 
-echo 'test'
+# echo 'test'
 
 cp $files grading-area
 cp TestListExamples.java grading-area
