@@ -1,0 +1,5 @@
+// Examples from https://dzone.com/articles/simple-http-server-in-java were useful references
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.InetSocketAddress;
+import java.net.URI;
