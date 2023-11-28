@@ -23,7 +23,20 @@ cp TestListExamples.java grading-area
 
 cd grading-area
 
-javac -cp $CPATH *.java
+javac -cp $CPATH *.java 2> error.txt
+
+#result=`grep "incompatible types" error.txt`
+#if [[ $? -ne 0 ]]
+#then
+#    echo 'argument error for tests'
+#    exit
+#fi
+
+if [[ $? -ne 0 ]]
+then
+    echo 'compiling error'
+    exit
+fi
 
 java -cp $CPATH org.junit.runner.JUnitCore TestListExamples > test-result.txt
 
@@ -35,6 +48,8 @@ then
     echo 'You get a Pass'
     exit
 fi
+
+
 
 
 # Draw a picture/take notes on the directory structure that's set up after
