@@ -5,7 +5,7 @@ rm -rf grading-area
 
 mkdir grading-area
 
-git clone $1 student-submission
+git clone $1 student-submission 2> gitClone.txt
 echo 'Finished cloning'
 
 files=`find student-submission/*.java`
@@ -25,13 +25,6 @@ cd grading-area
 
 javac -cp $CPATH *.java 2> error.txt
 
-#result=`grep "incompatible types" error.txt`
-#if [[ $? -ne 0 ]]
-#then
-#    echo 'argument error for tests'
-#    exit
-#fi
-
 if [[ $? -ne 0 ]]
 then
     echo 'compiling error'
@@ -40,15 +33,13 @@ fi
 
 java -cp $CPATH org.junit.runner.JUnitCore TestListExamples > test-result.txt
 
-result=`grep "OK" test-result.txt`
-echo $result
-
-if [[ $result == 'OK (1 test)' ]]
-then
-    echo 'You get a Pass'
-    exit
+passresult=`grep "OK" test-result.txt`
+if [[ $passresult != "" ]]
+then 
+	echo $passresult
+else
+	echo `grep "Tests run:" test-result.txt`
 fi
-
 
 
 
